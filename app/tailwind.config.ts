@@ -15,6 +15,8 @@ const config: Config = {
       'soft-green':'#B9D9C3',
       'soft-blue':'#D1D1D1',
       'green': '#B5B5B6',
+      'gray':'#D8DCD6',
+      'dark-blue':'#1F3B4D',
     },
   },
   plugins: [],
