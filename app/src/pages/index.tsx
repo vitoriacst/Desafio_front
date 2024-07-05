@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <Provider store={store}>
-    <main>
+    <main className="bg-pantone">
     <Layout/>
     </main>
     </Provider>
