@@ -29,8 +29,7 @@ export default function EventComponent({ eventData }: EventProps) {
               </div>
             ): (
               <div className="bg-soft-blue border-t border-b border-soft-green text-blocky-dark px-4 py-3 mt-4 mb-4 rounded-sm" role="alert">
-                <p className="font-bold">Importante</p>
-                <p className="text-sm">Restam alguns ingressos.</p>
+                <p className="text-sm">Restam alguns ingressos!</p>
               </div>
             )
             }
