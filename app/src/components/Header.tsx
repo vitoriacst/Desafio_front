@@ -1,7 +1,7 @@
+
 export default function Header () {
 
-  // criar lógica para redirecionar das páginas nos botões
-
+// const event = useSelector((state: RootState) => state.EventsSlice)
   return(
     <div className="flex bg-blocky-dark w-full h-14 items-center justify-between p-4 fixed">
       <div>

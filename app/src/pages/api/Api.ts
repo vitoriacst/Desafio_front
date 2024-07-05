@@ -1,23 +1,20 @@
-import { useState } from "react"
+import { events } from '@/redux/reducers/EventsSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-const url_api = 'https://demo.ws.itarget.com.br/event.php'
+export default function Api(url: string)  {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('aqui', data)
+        dispatch(events(data))
+        console.log('before', data)
+
+      });
+  }, []);
+};
 
 
-export default function Api(){
-const[loading, setLoading] = useState(false)
-const fetchAll = async() => {
-  try{
-    setLoading(true)
-    const data = await fetch(url_api)
-    const result = await data.json()
-    return {
-      props: {result}
-    }
-  }
-  catch(error){
-    console.log(error)
-  } finally {
-    setLoading(false)
-  }
-}
-}
+
