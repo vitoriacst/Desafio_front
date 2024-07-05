@@ -1,7 +1,6 @@
 
 export default function Header () {
 
-// const event = useSelector((state: RootState) => state.EventsSlice)
   return(
     <div className="flex bg-blocky-dark w-full h-14 items-center justify-between p-4 fixed">
       <div>

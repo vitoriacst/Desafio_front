@@ -1,18 +1,19 @@
+import { EventProps } from "@/types/Event"; // Certifique-se de importar Event e EventProps corretamente
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface EventsState {
-  value: string;
+  value: EventProps[];
 }
 
 const initialState: EventsState = {
-  value: ''
+  value: [],
 };
 
 const eventsSlice = createSlice({
   name: 'event',
   initialState,
   reducers: {
-    events: (state, action: PayloadAction<string>) => {
+    events: (state, action: PayloadAction<EventProps[]>) => {
       state.value = action.payload;
     }
   }
@@ -20,3 +21,4 @@ const eventsSlice = createSlice({
 
 export const { events } = eventsSlice.actions;
 export default eventsSlice.reducer;
+
