@@ -1,8 +1,17 @@
 import { EventProps } from "@/types/Event"; // Importa a interface Event conforme necessário
+import { useRouter } from "next/router";
 
 
 export default function EventComponent({ eventData }: EventProps) {
+
   const { data } = eventData
+
+  const router = useRouter()
+
+  const handleClick = (id: number) => {
+    router.push('/registration')
+    localStorage.setItem('event_id', JSON.stringify(id));
+  }
 
   const formatDate = (dateString:string) => {
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
@@ -14,7 +23,7 @@ export default function EventComponent({ eventData }: EventProps) {
     <div className="gap-6 pt-4 p-2">
       <div className="flex flex-col gap-6 justify-center mt-12 md:flex-row">
         {data && data.map((event) => (
-          <div key={event.id} className="p-4 flex flex-col rounded-sm bg-gray w-3/5">
+          <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
             <h3 className="mb-2 text-2xl font-bold text-black">{event.name}</h3>
             <span>{formatDate(event.start_date)}</span>
             {event.status === false ? (
@@ -33,7 +42,7 @@ export default function EventComponent({ eventData }: EventProps) {
               </div>
             )
             }
-            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20" disabled={!event.status}>
+            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20" disabled={!event.status} onClick={()=> handleClick(event.id)}>
               <span className="text-white text-sm">Participar do evento</span>
             </button>
           </div>
