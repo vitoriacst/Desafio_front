@@ -17,6 +17,8 @@ const config: Config = {
       'green': '#B5B5B6',
       'gray':'#D8DCD6',
       'dark-blue':'#1F3B4D',
+      'dark-green':'#017374',
+      'blocky-dark':'#1B2431',
     },
   },
   plugins: [],
