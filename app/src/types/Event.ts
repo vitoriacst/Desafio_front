@@ -1,5 +1,5 @@
 // types/Event.ts
-export interface Event {
+export interface EventProps {
   id: number;
   name: string;
   start_date: string;
@@ -7,9 +7,12 @@ export interface Event {
   status: boolean;
 }
 
-
-export interface EventProps {
-  eventData: {
-    data: Event[];
-  };
+export interface EventsData {
+  data: {
+    id: number;
+    name: string;
+    start_date: string;
+    end_date: string;
+    status: boolean;
+  }[];
 }

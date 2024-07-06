@@ -1,10 +1,11 @@
-import { EventProps } from "@/types/Event"; // Importa a interface Event conforme necessário
+import { RootState } from "@/redux/reducers";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 
-export default function EventComponent({ eventData }: EventProps) {
+export default function EventComponent() {
 
-  const { data } = eventData
+  const events = useSelector((state: RootState) => state.EventsSlice.value)
 
   const router = useRouter()
 
@@ -16,13 +17,14 @@ export default function EventComponent({ eventData }: EventProps) {
   const formatDate = (dateString:string) => {
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
+
     return formattedDate;
   }
 
   return (
     <div className="gap-6 pt-4 p-2">
       <div className="flex flex-col gap-6 justify-center mt-12 md:flex-row">
-        {data && data.map((event) => (
+        {events && events.map((event) => (
           <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
             <h3 className="mb-2 text-2xl font-bold text-black">{event.name}</h3>
             <span>{formatDate(event.start_date)}</span>
