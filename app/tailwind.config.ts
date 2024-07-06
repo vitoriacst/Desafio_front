@@ -37,6 +37,8 @@ const config: Config = {
         'dark-green': '#006400',
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 };
 export default config;
