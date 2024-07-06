@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import CartSlice from "./CartSlice";
 import EventsSlice from "./EventsSlice";
 
 const rootReducer = combineReducers({
-  EventsSlice
+  EventsSlice,
+  CartSlice
 })
 
 export type RootState = ReturnType<typeof rootReducer>
