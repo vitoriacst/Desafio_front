@@ -10,12 +10,13 @@ export default function EventComponent() {
   const router = useRouter()
 
   const handleClick = (id: number) => {
-    router.push('/registration')
+    router.push('/Cart')
     localStorage.setItem('event_id', JSON.stringify(id));
   }
 
   const formatDate = (dateString:string) => {
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+
     const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
 
     return formattedDate;
