@@ -1,4 +1,3 @@
-// types/Event.ts
 export interface EventProps {
   id: number;
   name: string;

@@ -1,0 +1,39 @@
+import { CartItem } from "@/types/Cart";
+import { useEffect, useState } from "react";
+
+export default function MyEvents() {
+  const [cartData, setCartData] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    const purchaseEvents = localStorage.getItem("purchased_items")
+     if (purchaseEvents) {
+       setCartData( JSON.parse(purchaseEvents))
+     }
+  }, [])
+
+  return(
+    <div className="flex items-center justify-center flex-col">
+      <h2 className="text-white font-bold mt-4">Meus eventos</h2>
+      <p>Informações sobre os seus eventos:</p>
+      {
+        cartData.map((event, index) => {
+          return(
+          <div key={index} className="bg-white w-3/5 p-4 rounded-md">
+            <h4 className="text-black font-bold">
+            {event.name}
+            </h4>
+            <div className="flex items-start justify-start gap-2">
+              <h5>
+                quantidade de ingressos:
+              </h5>
+              <h5>
+                {event.quantity}
+              </h5>
+            </div>
+          </div>
+          )
+        })
+      }
+    </div>
+  )
+}
