@@ -69,9 +69,11 @@ export default function Cart() {
             const event = events.find((e) => e.id === eventId);
             return (
               event && (
-                <div key={eventId}>
+                <div  key={eventId}>
                   <h3 className="text-black font-semibold">{event.name}</h3>
-                  <p>Quantidade de ingressos: {eventQuantity}</p>
+                  {
+                    eventQuantity ?  <p>Quantidade de ingressos: {eventQuantity}</p> :  <p>Adicione ingressos ao seu carrinho</p>
+                  }
                   <div className="flex items-start justify-start flex-col gap-2">
                     <input
                       type="number"
