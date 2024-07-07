@@ -47,7 +47,7 @@ export default function EventComponent() {
               </div>
             )
             }
-            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20" disabled={!event.status} onClick={()=> handleClick(event.id)}>
+            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20 hover:bg-blocky-dark" disabled={!event.status} onClick={()=> handleClick(event.id)}>
               <span className="text-white text-sm">Adicionar ao carrinho</span>
             </button>
           </div>
