@@ -15,7 +15,7 @@ export default function MyEvents() {
   return(
     <div>
       <Header/>
-      <div className="flex items-center justify-center flex-col">
+      <div className="flex items-center justify-center flex-col gap-6 mb-4">
         <h2 className="text-white font-bold mt-16 md:mt-24">Meus eventos</h2>
         <p>Informações sobre os seus eventos:</p>
         {

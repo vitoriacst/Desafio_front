@@ -1,17 +1,19 @@
 import { RootState } from "@/redux/reducers";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 
 export default function EventComponent() {
+  const [selectedEventIds, setSelectedEventIds] = useState<number[]>([]);
 
   const events = useSelector((state: RootState) => state.EventsSlice.value)
 
-  const router = useRouter()
 
   const handleClick = (id: number) => {
-    router.push('/Cart')
-    localStorage.setItem('event_id', JSON.stringify(id));
+    if (!selectedEventIds.includes(id)) {
+      setSelectedEventIds((prevIds) => [...prevIds, id]);
+      localStorage.setItem('event_id', JSON.stringify(selectedEventIds));
+    }
   }
 
   const formatDate = (dateString:string) => {
@@ -46,7 +48,7 @@ export default function EventComponent() {
             )
             }
             <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20" disabled={!event.status} onClick={()=> handleClick(event.id)}>
-              <span className="text-white text-sm">Participar do evento</span>
+              <span className="text-white text-sm">Adicionar ao carrinho</span>
             </button>
           </div>
         ))}
