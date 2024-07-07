@@ -1,12 +1,12 @@
 import { RootState } from "@/redux/reducers";
 import { CartItem } from "@/types/Cart";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Cart() {
   const [eventIds, setEventIds] = useState<number[]>([]);
-  const [eventQuantity, setEventQuantity] = useState<number>(1);
+  const [eventQuantities, setEventQuantities] = useState<{ [key: number]: number }>({});
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [alertFinishCart, setAlertFinishCart] = useState<boolean>(false);
 
@@ -28,7 +28,7 @@ export default function Cart() {
       const item: CartItem = {
         id: event.id,
         name: event.name,
-        quantity: eventQuantity,
+        quantity: eventQuantities[eventId] || 1,
       };
       setCartItems((prevCartItems) => [...prevCartItems, item]);
       localStorage.setItem("cart_items", JSON.stringify([...cartItems, item]));
@@ -44,41 +44,41 @@ export default function Cart() {
   const finalizePurchase = () => {
     localStorage.setItem("purchased_items", JSON.stringify(cartItems));
     setEventIds([]);
-    setEventQuantity(1);
+    setEventQuantities({});
     setCartItems([]);
     localStorage.removeItem("event_id");
     localStorage.removeItem("cart_items");
     setAlertFinishCart(true);
   };
 
-  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = parseInt(event.target.value);
-    setEventQuantity(newQuantity);
+  const handleQuantityChange = (eventId: number, newQuantity: number) => {
+    setEventQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [eventId]: newQuantity,
+    }));
   };
 
   const handleReturnToStart = () => {
-    router.push('/')
+    router.push('/');
     setAlertFinishCart(false);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mb-2">
       {!alertFinishCart && eventIds.length > 0 ? (
         <div className="bg-white gap-4 p-4 w-4/5 mt-4">
           {eventIds.map((eventId) => {
             const event = events.find((e) => e.id === eventId);
             return (
               event && (
-                <div  key={eventId}>
+                <div key={eventId}>
                   <h3 className="text-black font-semibold">{event.name}</h3>
-                  {
-                    eventQuantity ?  <p>Quantidade de ingressos: {eventQuantity}</p> :  <p>Adicione ingressos ao seu carrinho</p>
-                  }
+                  <p>Quantidade de ingressos: {eventQuantities[eventId] || 1}</p>
                   <div className="flex items-start justify-start flex-col gap-2">
                     <input
                       type="number"
-                      value={eventQuantity}
-                      onChange={handleQuantityChange}
+                      value={eventQuantities[eventId] || 1}
+                      onChange={(e) => handleQuantityChange(eventId, parseInt(e.target.value))}
                       className="border-gray-300 border rounded-md p-1 text-center"
                     />
                     <button
@@ -106,7 +106,7 @@ export default function Cart() {
       )}
 
       {!alertFinishCart && cartItems.length > 0 && (
-        <div className="mt-4  w-4/5">
+        <div className="mt-4 w-4/5">
           <h2 className="text-lg font-semibold mb-2">Itens no Carrinho:</h2>
           {cartItems.map((item) => (
             <div key={item.id} className="bg-white p-2 gap-4">
