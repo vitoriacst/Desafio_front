@@ -69,7 +69,7 @@ export default function Cart(){
 
   return (
     <div className="flex flex-col items-center justify-center">
-      {!alertFinishCart && eventId && (
+      {!alertFinishCart && eventId ? (
         <div className="bg-white gap-4 p-4 w-4/5 mt-4">
           <h3 className="text-black font-semibold">{events.find((e) => e.id === eventId)?.name}</h3>
           <p>Quantidade de ingressos: {eventQuantity}</p>
@@ -87,6 +87,18 @@ export default function Cart(){
               Adicionar ao Carrinho
             </button>
           </div>
+        </div>
+      ) : !alertFinishCart  && (
+        <div className="bg-white gap-4 p-4 w-4/5 mt-4 rounded-md">
+          <h3 className="text-black">
+            Seu carrinho está vazio!!
+          </h3>
+          <button
+            className="bg-black hover:bg-dark-blue text-white font-bold py-2 px-4 rounded mt-2"
+            onClick={handleReturnToStart}
+          >
+            Voltar para o Início
+          </button>
         </div>
       )}
 
