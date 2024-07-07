@@ -26,7 +26,7 @@ export default function EventComponent() {
 
   return (
     <div className="gap-6 pt-4 p-2">
-      <div className="flex flex-col gap-6 justify-center mt-12 md:flex-row">
+      <div className="flex flex-col items-center gap-6 justify-center mt-12 md:flex-row">
         {events && events.map((event) => (
           <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
             <h3 className="mb-2 text-2xl font-bold text-black">{event.name}</h3>
