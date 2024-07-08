@@ -16,13 +16,19 @@ export default function EventComponent() {
     }
   }
 
-  const formatDate = (dateString:string) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    };
 
     const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
 
     return formattedDate;
   }
+
 
   return (
     <div className="flex gap-6  p-10">
@@ -30,7 +36,7 @@ export default function EventComponent() {
         <h1 className="font-extrabold text-2xl">Eventos disponíveis</h1>
       <div className="flex flex-col items-center gap-6 justify-center mt-12 md:flex-row">
         {events && events.map((event) => (
-          <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
+          <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-4/5">
             <h3 className="mb-2 text-2xl font-bold text-black">{event.name}</h3>
             <span>{formatDate(event.start_date)}</span>
             {event.status === false ? (
