@@ -22,7 +22,7 @@ https://desafio-front-z853.vercel.app/
 - Html5
 - Css3
 - TypeScript
-- estados
+- Redux
 - tailwind
 - daisy ui
 
