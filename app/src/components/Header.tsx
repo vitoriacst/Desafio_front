@@ -13,7 +13,7 @@ export default function Header () {
       const parsedEventIds = JSON.parse(storedEventIds);
       setEventIds(parsedEventIds);
     }
-  }, []);
+  }, [eventIds.length]);
 
   return(
     <div className="flex bg-teal w-full h-14 items-center justify-between p-4 fixed">

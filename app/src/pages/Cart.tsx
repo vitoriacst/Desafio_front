@@ -66,7 +66,7 @@ export default function Cart() {
   return (
     <div className="flex flex-col items-center justify-center mb-2">
       {!alertFinishCart && eventIds.length > 0 ? (
-        <div className="bg-white gap-4 p-4 w-4/5 mt-4">
+        <div className="bg-white gap-4 p-4 w-4/5 mt-8">
           {eventIds.map((eventId) => {
             const event = events.find((e) => e.id === eventId);
             return (
@@ -120,12 +120,20 @@ export default function Cart() {
               </button>
             </div>
           ))}
-          <button
-            className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-            onClick={finalizePurchase}
-          >
-            Finalizar Compra
-          </button>
+          <div className="flex items-start justify-start gap-2">
+            <button
+              className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={finalizePurchase}
+            >
+              Finalizar Compra
+            </button>
+            <button
+              className="bg-black hover:bg-dark-blue text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={handleReturnToStart}
+            >
+              Voltar para a Home
+            </button>
+          </div>
         </div>
       )}
 

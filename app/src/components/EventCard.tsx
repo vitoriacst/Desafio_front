@@ -25,7 +25,9 @@ export default function EventComponent() {
   }
 
   return (
-    <div className="gap-6 pt-4 p-2">
+    <div className="flex gap-6  p-10">
+      <div className="flex justify-start items-start flex-col mt-20">
+        <h1 className="font-extrabold text-2xl">Eventos disponíveis</h1>
       <div className="flex flex-col items-center gap-6 justify-center mt-12 md:flex-row">
         {events && events.map((event) => (
           <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
@@ -52,6 +54,7 @@ export default function EventComponent() {
             </button>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
