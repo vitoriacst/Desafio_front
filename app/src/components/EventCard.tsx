@@ -1,28 +1,35 @@
-import { EventProps } from "@/types/Event"; // Importa a interface Event conforme necessário
-import { useRouter } from "next/router";
+import { RootState } from "@/redux/reducers";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
-export default function EventComponent({ eventData }: EventProps) {
+export default function EventComponent() {
+  const [selectedEventIds, setSelectedEventIds] = useState<number[]>([]);
 
-  const { data } = eventData
+  const events = useSelector((state: RootState) => state.EventsSlice.value)
 
-  const router = useRouter()
 
   const handleClick = (id: number) => {
-    router.push('/registration')
-    localStorage.setItem('event_id', JSON.stringify(id));
+    if (!selectedEventIds.includes(id)) {
+      setSelectedEventIds((prevIds) => [...prevIds, id]);
+      localStorage.setItem('event_id', JSON.stringify(selectedEventIds));
+    }
   }
 
   const formatDate = (dateString:string) => {
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+
     const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
+
     return formattedDate;
   }
 
   return (
-    <div className="gap-6 pt-4 p-2">
-      <div className="flex flex-col gap-6 justify-center mt-12 md:flex-row">
-        {data && data.map((event) => (
+    <div className="flex gap-6  p-10">
+      <div className="flex justify-start items-start flex-col mt-20">
+        <h1 className="font-extrabold text-2xl">Eventos disponíveis</h1>
+      <div className="flex flex-col items-center gap-6 justify-center mt-12 md:flex-row">
+        {events && events.map((event) => (
           <div key={event.id} className="p-4 flex flex-col rounded-sm bg-white w-3/5">
             <h3 className="mb-2 text-2xl font-bold text-black">{event.name}</h3>
             <span>{formatDate(event.start_date)}</span>
@@ -42,11 +49,12 @@ export default function EventComponent({ eventData }: EventProps) {
               </div>
             )
             }
-            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20" disabled={!event.status} onClick={()=> handleClick(event.id)}>
-              <span className="text-white text-sm">Participar do evento</span>
+            <button className="bg-dark-blue p-2 rounded-md disabled:opacity-20 hover:bg-blocky-dark" disabled={!event.status} onClick={()=> handleClick(event.id)}>
+              <span className="text-white text-sm">Adicionar ao carrinho</span>
             </button>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
